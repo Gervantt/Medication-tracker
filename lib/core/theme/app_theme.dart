@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medtrack/core/theme/status_colors.dart';
 
 abstract final class AppTheme {
   static const _seedColor = Color(0xFF00897B);
@@ -18,6 +19,12 @@ abstract final class AppTheme {
       inputDecorationTheme: const InputDecorationTheme(
         border: OutlineInputBorder(),
       ),
+      extensions: [
+        if (brightness == Brightness.dark)
+          StatusColors.dark
+        else
+          StatusColors.light,
+      ],
     );
   }
 }
