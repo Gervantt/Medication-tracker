@@ -13,6 +13,7 @@ import 'package:medtrack/features/medications/domain/usecases/delete_medication.
 import 'package:medtrack/features/medications/domain/usecases/get_medication.dart';
 import 'package:medtrack/features/medications/domain/usecases/update_medication.dart';
 import 'package:medtrack/features/medications/domain/usecases/watch_medications.dart';
+import 'package:medtrack/features/medications/presentation/cubit/medication_form_cubit.dart';
 import 'package:medtrack/features/medications/presentation/cubit/medications_list_cubit.dart';
 
 final GetIt getIt = GetIt.instance;
@@ -45,7 +46,15 @@ void _registerMedications() {
     ..registerLazySingleton(() => AddMedication(getIt()))
     ..registerLazySingleton(() => UpdateMedication(getIt()))
     ..registerLazySingleton(() => DeleteMedication(getIt()))
-    ..registerFactory(() => MedicationsListCubit(getIt()));
+    ..registerFactory(() => MedicationsListCubit(getIt()))
+    ..registerFactory(
+      () => MedicationFormCubit(
+        getMedication: getIt(),
+        addMedication: getIt(),
+        updateMedication: getIt(),
+        deleteMedication: getIt(),
+      ),
+    );
 }
 
 void _registerIntakes() {
