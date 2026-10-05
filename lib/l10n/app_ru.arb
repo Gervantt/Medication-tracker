@@ -35,5 +35,69 @@
   "retry": "Повторить",
   "@retry": {
     "description": "Retry button label"
+  },
+  "medicationsEmptyTitle": "Пока нет лекарств",
+  "@medicationsEmptyTitle": {
+    "description": "Empty state title on the medications list"
+  },
+  "medicationsEmptyMessage": "Добавьте лекарство, чтобы видеть приёмы на сегодня и получать напоминания",
+  "@medicationsEmptyMessage": {
+    "description": "Empty state message on the medications list"
+  },
+  "dosageUnitMg": "мг",
+  "@dosageUnitMg": {
+    "description": "Milligrams unit"
+  },
+  "dosageUnitMl": "мл",
+  "@dosageUnitMl": {
+    "description": "Millilitres unit"
+  },
+  "dosageUnitTablet": "табл.",
+  "@dosageUnitTablet": {
+    "description": "Tablets unit (abbreviated)"
+  },
+  "medicationFormTablet": "Таблетка",
+  "@medicationFormTablet": {
+    "description": "Medication form: tablet"
+  },
+  "medicationFormCapsule": "Капсула",
+  "@medicationFormCapsule": {
+    "description": "Medication form: capsule"
+  },
+  "medicationFormSyrup": "Сироп",
+  "@medicationFormSyrup": {
+    "description": "Medication form: syrup"
+  },
+  "medicationFormInjection": "Укол",
+  "@medicationFormInjection": {
+    "description": "Medication form: injection"
+  },
+  "everyDay": "Каждый день",
+  "@everyDay": {
+    "description": "Schedule: every day of the week"
+  },
+  "medicationSummary": "{dosage} · {form}",
+  "@medicationSummary": {
+    "description": "Dosage and form of a medication in a list",
+    "placeholders": {
+      "dosage": {
+        "type": "String"
+      },
+      "form": {
+        "type": "String"
+      }
+    }
+  },
+  "scheduleSummary": "{times} · {days}",
+  "@scheduleSummary": {
+    "description": "Intake times and active weekdays",
+    "placeholders": {
+      "times": {
+        "type": "String"
+      },
+      "days": {
+        "type": "String"
+      }
+    }
   }
 }
