@@ -117,7 +117,7 @@ class _CalendarDay extends StatelessWidget {
             child: Text(
               '${day.date.day}',
               style: theme.textTheme.bodySmall?.copyWith(
-                color: fill == null ? null : Colors.white,
+                color: fill == null ? null : _onColor(fill),
                 fontWeight: isToday ? FontWeight.bold : null,
               ),
             ),
@@ -127,6 +127,13 @@ class _CalendarDay extends StatelessWidget {
     );
   }
 }
+
+/// Black or white, whichever is readable on [background]
+/// (white on yellow would be unreadable in the light theme).
+Color _onColor(Color background) =>
+    ThemeData.estimateBrightnessForColor(background) == Brightness.dark
+    ? Colors.white
+    : Colors.black;
 
 class _Legend extends StatelessWidget {
   const _Legend();
