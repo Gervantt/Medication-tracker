@@ -72,23 +72,34 @@ void main() {
     );
 
     blocTest<TodayCubit, TodayState>(
-      'resubscribes only after midnight',
+      'refresh on the same day reloads silently',
       build: buildCubit,
-      act: (cubit) {
-        withClock(Clock.fixed(DateTime(2026, 10, 6, 23)), () {
-          cubit
-            ..subscribe()
-            ..refreshIfDayChanged();
-        });
-        withClock(
-          Clock.fixed(DateTime(2026, 10, 7, 7)),
-          cubit.refreshIfDayChanged,
-        );
+      act: (cubit) async {
+        withClock(Clock.fixed(DateTime(2026, 10, 6, 9)), cubit.subscribe);
+        await Future<void>.delayed(Duration.zero);
+        withClock(Clock.fixed(DateTime(2026, 10, 6, 21)), cubit.refresh);
       },
-      verify: (_) {
-        verify(() => watchDayIntakes(today)).called(1);
-        verify(() => watchDayIntakes(DateTime(2026, 10, 7))).called(1);
+      expect: () => [
+        const TodayLoading(),
+        TodayLoaded(day: today, intakes: [intake]),
+      ],
+      verify: (_) => verify(() => watchDayIntakes(today)).called(2),
+    );
+
+    blocTest<TodayCubit, TodayState>(
+      'refresh after midnight shows loading and switches the day',
+      build: buildCubit,
+      act: (cubit) async {
+        withClock(Clock.fixed(DateTime(2026, 10, 6, 23)), cubit.subscribe);
+        await Future<void>.delayed(Duration.zero);
+        withClock(Clock.fixed(DateTime(2026, 10, 7, 7)), cubit.refresh);
       },
+      expect: () => [
+        const TodayLoading(),
+        TodayLoaded(day: today, intakes: [intake]),
+        const TodayLoading(),
+        TodayLoaded(day: DateTime(2026, 10, 7), intakes: [intake]),
+      ],
     );
 
     blocTest<TodayCubit, TodayState>(

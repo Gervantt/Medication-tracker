@@ -27,10 +27,20 @@ class TodayCubit extends Cubit<TodayState> {
   DateTime? _day;
 
   /// Starts (or restarts) watching today's intakes.
-  void subscribe() {
+  void subscribe() => _watch(showLoading: true);
+
+  /// Re-reads today's intakes when the app returns to the foreground:
+  /// the day may have changed, and a "Taken" action pressed in a
+  /// notification is written from another isolate that this stream
+  /// does not observe. Shows a loader only when the day changed.
+  void refresh() => _watch(
+    showLoading: state is! TodayLoaded || clock.now().dateOnly != _day,
+  );
+
+  void _watch({required bool showLoading}) {
     final day = clock.now().dateOnly;
     _day = day;
-    emit(const TodayLoading());
+    if (showLoading) emit(const TodayLoading());
     unawaited(_subscription?.cancel());
     _subscription = _watchDayIntakes(day).listen(
       (intakes) => emit(TodayLoaded(day: day, intakes: intakes)),
@@ -39,12 +49,6 @@ class TodayCubit extends Cubit<TodayState> {
         emit(const TodayError());
       },
     );
-  }
-
-  /// Switches to the new day if midnight passed while the app was open
-  /// or in the background.
-  void refreshIfDayChanged() {
-    if (clock.now().dateOnly != _day) subscribe();
   }
 
   Future<void> markTaken(ScheduledIntake intake) =>

@@ -35,7 +35,7 @@ class _TodayViewState extends State<TodayView> {
   void initState() {
     super.initState();
     _lifecycleListener = AppLifecycleListener(
-      onResume: context.read<TodayCubit>().refreshIfDayChanged,
+      onResume: context.read<TodayCubit>().refresh,
     );
   }
 
