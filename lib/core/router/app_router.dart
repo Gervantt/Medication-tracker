@@ -6,6 +6,9 @@ import 'package:medtrack/core/router/app_routes.dart';
 import 'package:medtrack/core/widgets/home_shell.dart';
 import 'package:medtrack/features/diary/presentation/pages/diary_page.dart';
 import 'package:medtrack/features/diary/presentation/pages/wellbeing_entry_page.dart';
+import 'package:medtrack/features/drug_search/domain/entities/drug_label.dart';
+import 'package:medtrack/features/drug_search/presentation/pages/drug_details_page.dart';
+import 'package:medtrack/features/drug_search/presentation/pages/drug_search_page.dart';
 import 'package:medtrack/features/medications/presentation/pages/medication_form_page.dart';
 import 'package:medtrack/features/medications/presentation/pages/medications_page.dart';
 import 'package:medtrack/features/statistics/presentation/pages/statistics_page.dart';
@@ -30,7 +33,25 @@ GoRouter createAppRouter() {
               GoRoute(
                 path: 'new',
                 parentNavigatorKey: rootNavigatorKey,
-                builder: (context, state) => const MedicationFormPage(),
+                builder: (context, state) => MedicationFormPage(
+                  initialName: state.uri.queryParameters['name'],
+                ),
+              ),
+              GoRoute(
+                path: 'search',
+                parentNavigatorKey: rootNavigatorKey,
+                builder: (context, state) => const DrugSearchPage(),
+                routes: [
+                  GoRoute(
+                    path: ':id',
+                    parentNavigatorKey: rootNavigatorKey,
+                    builder: (context, state) => DrugDetailsPage(
+                      id: state.pathParameters['id']!,
+                      // Present when opened from the search results.
+                      initialLabel: state.extra as DrugLabel?,
+                    ),
+                  ),
+                ],
               ),
               GoRoute(
                 path: ':id/edit',

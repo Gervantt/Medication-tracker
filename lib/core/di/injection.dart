@@ -18,6 +18,8 @@ import 'package:medtrack/features/drug_search/data/repositories/drug_repository_
 import 'package:medtrack/features/drug_search/domain/repositories/drug_repository.dart';
 import 'package:medtrack/features/drug_search/domain/usecases/get_drug_label.dart';
 import 'package:medtrack/features/drug_search/domain/usecases/search_drugs.dart';
+import 'package:medtrack/features/drug_search/presentation/bloc/drug_search_bloc.dart';
+import 'package:medtrack/features/drug_search/presentation/cubit/drug_details_cubit.dart';
 import 'package:medtrack/features/intakes/data/repositories/intake_repository_impl.dart';
 import 'package:medtrack/features/intakes/domain/repositories/intake_repository.dart';
 import 'package:medtrack/features/intakes/domain/usecases/clear_intake_mark.dart';
@@ -170,5 +172,7 @@ void _registerDrugSearch() {
     )
     ..registerLazySingleton<DrugRepository>(() => DrugRepositoryImpl(getIt()))
     ..registerLazySingleton(() => SearchDrugs(getIt()))
-    ..registerLazySingleton(() => GetDrugLabel(getIt()));
+    ..registerLazySingleton(() => GetDrugLabel(getIt()))
+    ..registerFactory(() => DrugSearchBloc(getIt()))
+    ..registerFactory(() => DrugDetailsCubit(getIt()));
 }

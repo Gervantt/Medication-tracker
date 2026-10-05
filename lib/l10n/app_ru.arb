@@ -459,5 +459,89 @@
   "dayStatusNoIntakes": "Нет приёмов",
   "@dayStatusNoIntakes": {
     "description": "Calendar day status: nothing planned"
+  },
+  "medicalDisclaimer": "MedTrack не заменяет консультацию врача. Сведения о препаратах взяты из открытой базы FDA (США) и носят справочный характер.",
+  "@medicalDisclaimer": {
+    "description": "Medical disclaimer shown on onboarding and drug details"
+  },
+  "drugSearchTitle": "Поиск препарата",
+  "@drugSearchTitle": {
+    "description": "Drug search screen title and entry point tooltip"
+  },
+  "drugSearchHint": "Например, Advil или ibuprofen",
+  "@drugSearchHint": {
+    "description": "Hint of the drug search field"
+  },
+  "drugSearchIntro": "Поиск идёт по американской базе FDA, поэтому вводите название на английском: торговое (Advil) или действующее вещество (ibuprofen).",
+  "@drugSearchIntro": {
+    "description": "Initial state of the drug search"
+  },
+  "drugSearchEmptyTitle": "Ничего не найдено",
+  "@drugSearchEmptyTitle": {
+    "description": "Drug search: no results title"
+  },
+  "drugSearchEmptyMessage": "Проверьте написание. В американской базе препарат может называться иначе, попробуйте действующее вещество.",
+  "@drugSearchEmptyMessage": {
+    "description": "Drug search: no results message"
+  },
+  "drugUnnamed": "Без названия",
+  "@drugUnnamed": {
+    "description": "Shown for a drug label without a name"
+  },
+  "drugDetailsTitle": "Препарат",
+  "@drugDetailsTitle": {
+    "description": "Drug details title while loading"
+  },
+  "drugPurpose": "Назначение",
+  "@drugPurpose": {
+    "description": "Drug details section: indications / purpose"
+  },
+  "drugDosage": "Дозировка и применение",
+  "@drugDosage": {
+    "description": "Drug details section: dosage and administration"
+  },
+  "drugWarnings": "Предупреждения",
+  "@drugWarnings": {
+    "description": "Drug details section: warnings"
+  },
+  "drugSideEffects": "Побочные эффекты",
+  "@drugSideEffects": {
+    "description": "Drug details section: adverse reactions"
+  },
+  "drugSourceNote": "Источник: openFDA Drug Label API. Тексты инструкций приведены на английском языке.",
+  "@drugSourceNote": {
+    "description": "Data source note on drug details"
+  },
+  "addToMyMedications": "Добавить в мои лекарства",
+  "@addToMyMedications": {
+    "description": "Button that opens the medication form prefilled with the drug name"
+  },
+  "showMore": "Показать полностью",
+  "@showMore": {
+    "description": "Expands a long text"
+  },
+  "showLess": "Свернуть",
+  "@showLess": {
+    "description": "Collapses a long text"
+  },
+  "failureNetwork": "Нет подключения к интернету. Проверьте сеть и попробуйте снова",
+  "@failureNetwork": {
+    "description": "Network failure message"
+  },
+  "failureTimeout": "Сервер долго не отвечает. Попробуйте ещё раз",
+  "@failureTimeout": {
+    "description": "Timeout failure message"
+  },
+  "failureNotFound": "Ничего не найдено",
+  "@failureNotFound": {
+    "description": "Not found failure message"
+  },
+  "failureRateLimit": "Слишком много запросов к базе FDA. Подождите минуту и попробуйте снова",
+  "@failureRateLimit": {
+    "description": "Rate limit failure message"
+  },
+  "failureServer": "Сервис FDA временно недоступен. Попробуйте позже",
+  "@failureServer": {
+    "description": "Server failure message"
   }
 }

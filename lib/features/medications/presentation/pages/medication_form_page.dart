@@ -22,9 +22,11 @@ import 'package:medtrack/features/medications/presentation/widgets/form/weekdays
 
 class MedicationFormPage extends StatelessWidget {
   /// Opens an empty form, or loads the medication when [medicationId] is set.
-  const MedicationFormPage({this.medicationId, super.key});
+  /// [initialName] prefills a new medication, e.g. from the drug search.
+  const MedicationFormPage({this.medicationId, this.initialName, super.key});
 
   final int? medicationId;
+  final String? initialName;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +34,12 @@ class MedicationFormPage extends StatelessWidget {
       create: (_) {
         final cubit = getIt<MedicationFormCubit>();
         final id = medicationId;
-        if (id != null) unawaited(cubit.load(id));
+        final name = initialName;
+        if (id != null) {
+          unawaited(cubit.load(id));
+        } else if (name != null) {
+          cubit.nameChanged(name);
+        }
         return cubit;
       },
       child: const MedicationFormView(),

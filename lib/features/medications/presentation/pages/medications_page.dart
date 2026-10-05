@@ -30,7 +30,16 @@ class MedicationsView extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.navMedications)),
+      appBar: AppBar(
+        title: Text(l10n.navMedications),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.travel_explore),
+            tooltip: l10n.drugSearchTitle,
+            onPressed: () => context.push(AppRoutes.drugSearch),
+          ),
+        ],
+      ),
       body: BlocBuilder<MedicationsListCubit, MedicationsListState>(
         builder: (context, state) => switch (state) {
           MedicationsListLoading() => const LoadingView(),

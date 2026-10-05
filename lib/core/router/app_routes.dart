@@ -7,7 +7,16 @@ abstract final class AppRoutes {
   static const diary = '/diary';
   static const statistics = '/statistics';
 
+  static const drugSearch = '$medications/search';
+
   static String medicationEdit(int id) => '$medications/$id/edit';
+
+  /// New medication form with [name] prefilled.
+  static String medicationNewWithName(String name) =>
+      Uri(path: medicationNew, queryParameters: {'name': name}).toString();
+
+  static String drugDetails(String id) =>
+      '$drugSearch/${Uri.encodeComponent(id)}';
 
   static String diaryEntry(DateTime date) => '$diary/entry/${date.isoDate}';
 }
