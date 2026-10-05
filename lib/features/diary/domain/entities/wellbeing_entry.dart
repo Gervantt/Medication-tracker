@@ -6,7 +6,10 @@ class WellbeingEntry extends Equatable {
     required this.mood,
     this.symptoms = const [],
     this.note,
-  }) : assert(mood >= 1 && mood <= 5, 'mood must be in 1..5');
+  }) : assert(mood >= minMood && mood <= maxMood, 'mood must be in 1..5');
+
+  static const minMood = 1;
+  static const maxMood = 5;
 
   /// Local midnight of the day the entry belongs to.
   final DateTime date;

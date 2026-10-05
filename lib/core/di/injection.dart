@@ -6,6 +6,10 @@ import 'package:medtrack/core/database/app_database.dart';
 import 'package:medtrack/core/router/app_router.dart';
 import 'package:medtrack/features/diary/data/repositories/wellbeing_repository_impl.dart';
 import 'package:medtrack/features/diary/domain/repositories/wellbeing_repository.dart';
+import 'package:medtrack/features/diary/domain/usecases/delete_wellbeing_entry.dart';
+import 'package:medtrack/features/diary/domain/usecases/get_wellbeing_entry.dart';
+import 'package:medtrack/features/diary/domain/usecases/save_wellbeing_entry.dart';
+import 'package:medtrack/features/diary/domain/usecases/watch_diary_entries.dart';
 import 'package:medtrack/features/intakes/data/repositories/intake_repository_impl.dart';
 import 'package:medtrack/features/intakes/domain/repositories/intake_repository.dart';
 import 'package:medtrack/features/intakes/domain/usecases/clear_intake_mark.dart';
@@ -90,9 +94,14 @@ void _registerIntakes() {
 }
 
 void _registerDiary() {
-  getIt.registerLazySingleton<WellbeingRepository>(
-    () => WellbeingRepositoryImpl(getIt<AppDatabase>().wellbeingDao),
-  );
+  getIt
+    ..registerLazySingleton<WellbeingRepository>(
+      () => WellbeingRepositoryImpl(getIt<AppDatabase>().wellbeingDao),
+    )
+    ..registerLazySingleton(() => WatchDiaryEntries(getIt()))
+    ..registerLazySingleton(() => GetWellbeingEntry(getIt()))
+    ..registerLazySingleton(() => SaveWellbeingEntry(getIt()))
+    ..registerLazySingleton(() => DeleteWellbeingEntry(getIt()));
 }
 
 void _registerToday() {
