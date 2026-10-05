@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medtrack/core/extensions/context_extensions.dart';
+import 'package:medtrack/core/widgets/form_section.dart';
 import 'package:medtrack/features/medications/domain/entities/medication_form.dart';
 import 'package:medtrack/features/medications/presentation/cubit/medication_form_cubit.dart';
 import 'package:medtrack/features/medications/presentation/cubit/medication_form_select.dart';
 import 'package:medtrack/features/medications/presentation/formatters/medication_formatter.dart';
-import 'package:medtrack/features/medications/presentation/widgets/form/form_section.dart';
 
 class MedicationFormSelector extends StatelessWidget {
   const MedicationFormSelector({super.key});

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-/// Titled block of the medication form with an optional error line.
+/// Titled block of a form with an optional error line.
 class FormSection extends StatelessWidget {
   const FormSection({
     required this.title,
