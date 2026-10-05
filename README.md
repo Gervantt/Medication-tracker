@@ -180,4 +180,3 @@ screen in light and dark themes and saves the images to `docs/screenshots/`.
   days. Versioning schedules (`valid_from` / `valid_to`) would fix this.
 - Deleting a medication deletes its intake history.
 - If the app is not opened for more than 7 days, reminders run out until it is opened again.
-- Verified on the iOS simulator; the Android build is configured but has not been run on a device yet.
