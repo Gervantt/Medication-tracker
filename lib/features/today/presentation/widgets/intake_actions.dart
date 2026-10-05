@@ -6,6 +6,7 @@ import 'package:medtrack/features/today/domain/entities/scheduled_intake.dart';
 import 'package:medtrack/features/today/presentation/cubit/today_cubit.dart';
 
 /// "Taken" / "Skipped" buttons for a pending intake, or its mark with undo.
+/// Switching between the two fades and resizes instead of jumping.
 class IntakeActions extends StatelessWidget {
   const IntakeActions({required this.intake, super.key});
 
@@ -13,38 +14,59 @@ class IntakeActions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final status = intake.status;
+    return AnimatedSwitcher(
+      duration: const Duration(milliseconds: 250),
+      transitionBuilder: (child, animation) => FadeTransition(
+        opacity: animation,
+        child: SizeTransition(
+          sizeFactor: animation,
+          alignment: Alignment.topCenter,
+          child: child,
+        ),
+      ),
+      // Different keys make AnimatedSwitcher treat them as new children.
+      child: status == null
+          ? _PendingActions(key: const ValueKey('pending'), intake: intake)
+          : _MarkedStatus(
+              key: ValueKey(status),
+              intake: intake,
+              status: status,
+            ),
+    );
+  }
+}
+
+class _PendingActions extends StatelessWidget {
+  const _PendingActions({required this.intake, super.key});
+
+  final ScheduledIntake intake;
+
+  @override
+  Widget build(BuildContext context) {
     final l10n = context.l10n;
     final cubit = context.read<TodayCubit>();
-    final status = intake.status;
-    if (status == null) {
-      return OverflowBar(
-        spacing: 8,
-        alignment: MainAxisAlignment.end,
-        children: [
-          TextButton(
-            onPressed: () => cubit.markSkipped(intake),
-            child: Text(l10n.markSkipped),
-          ),
-          FilledButton.tonal(
-            onPressed: () => cubit.markTaken(intake),
-            child: Text(l10n.markTaken),
-          ),
-        ],
-      );
-    }
-    return Row(
+    return OverflowBar(
+      spacing: 8,
+      alignment: MainAxisAlignment.end,
       children: [
-        _StatusLabel(status: status),
-        const Spacer(),
-        TextButton(onPressed: () => cubit.undo(intake), child: Text(l10n.undo)),
+        TextButton(
+          onPressed: () => cubit.markSkipped(intake),
+          child: Text(l10n.markSkipped),
+        ),
+        FilledButton.tonal(
+          onPressed: () => cubit.markTaken(intake),
+          child: Text(l10n.markTaken),
+        ),
       ],
     );
   }
 }
 
-class _StatusLabel extends StatelessWidget {
-  const _StatusLabel({required this.status});
+class _MarkedStatus extends StatelessWidget {
+  const _MarkedStatus({required this.intake, required this.status, super.key});
 
+  final ScheduledIntake intake;
   final IntakeStatus status;
 
   @override
@@ -60,11 +82,15 @@ class _StatusLabel extends StatelessWidget {
       IntakeStatus.skipped => (Icons.cancel, l10n.intakeSkipped, colors.error),
     };
     return Row(
-      mainAxisSize: MainAxisSize.min,
       children: [
         Icon(icon, color: color, size: 20),
         const SizedBox(width: 8),
         Text(label, style: TextStyle(color: color)),
+        const Spacer(),
+        TextButton(
+          onPressed: () => context.read<TodayCubit>().undo(intake),
+          child: Text(l10n.undo),
+        ),
       ],
     );
   }

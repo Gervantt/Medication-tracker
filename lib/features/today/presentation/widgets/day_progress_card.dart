@@ -33,9 +33,13 @@ class DayProgressCard extends StatelessWidget {
             const SizedBox(height: 12),
             ClipRRect(
               borderRadius: BorderRadius.circular(4),
-              child: LinearProgressIndicator(
-                value: total == 0 ? 0 : taken / total,
-                minHeight: 8,
+              // Animates from the previous value when an intake is marked.
+              child: TweenAnimationBuilder<double>(
+                tween: Tween(end: total == 0 ? 0 : taken / total),
+                duration: const Duration(milliseconds: 400),
+                curve: Curves.easeOut,
+                builder: (context, value, _) =>
+                    LinearProgressIndicator(value: value, minHeight: 8),
               ),
             ),
           ],
