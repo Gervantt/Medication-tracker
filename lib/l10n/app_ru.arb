@@ -99,5 +99,144 @@
         "type": "String"
       }
     }
+  },
+  "addMedication": "Добавить лекарство",
+  "@addMedication": {
+    "description": "Button that opens the new medication form"
+  },
+  "newMedicationTitle": "Новое лекарство",
+  "@newMedicationTitle": {
+    "description": "Title of the form for a new medication"
+  },
+  "editMedicationTitle": "Редактирование",
+  "@editMedicationTitle": {
+    "description": "Title of the form for editing a medication"
+  },
+  "fieldName": "Название",
+  "@fieldName": {
+    "description": "Medication name field label"
+  },
+  "fieldDosage": "Дозировка",
+  "@fieldDosage": {
+    "description": "Dosage amount field label"
+  },
+  "fieldUnit": "Единица",
+  "@fieldUnit": {
+    "description": "Dosage unit field label"
+  },
+  "fieldNote": "Заметка",
+  "@fieldNote": {
+    "description": "Note field label"
+  },
+  "sectionForm": "Форма выпуска",
+  "@sectionForm": {
+    "description": "Medication form section title"
+  },
+  "sectionSchedule": "Время приёма",
+  "@sectionSchedule": {
+    "description": "Intake times section title"
+  },
+  "addTime": "Добавить время",
+  "@addTime": {
+    "description": "Button that adds an intake time"
+  },
+  "sectionDays": "Дни приёма",
+  "@sectionDays": {
+    "description": "Weekdays section title"
+  },
+  "sectionCourse": "Курс",
+  "@sectionCourse": {
+    "description": "Course dates section title"
+  },
+  "courseStart": "Начало",
+  "@courseStart": {
+    "description": "Course start date label"
+  },
+  "courseEnd": "Окончание",
+  "@courseEnd": {
+    "description": "Course end date label"
+  },
+  "courseEndNotSet": "Без даты окончания",
+  "@courseEndNotSet": {
+    "description": "Shown when the course has no end date"
+  },
+  "clearEndDate": "Убрать дату окончания",
+  "@clearEndDate": {
+    "description": "Tooltip of the button that clears the end date"
+  },
+  "sectionColor": "Цвет метки",
+  "@sectionColor": {
+    "description": "Label color section title"
+  },
+  "labelColorOption": "Цвет {index}",
+  "@labelColorOption": {
+    "description": "Accessibility label of a color option",
+    "placeholders": {
+      "index": {
+        "type": "int"
+      }
+    }
+  },
+  "save": "Сохранить",
+  "@save": {
+    "description": "Save button label"
+  },
+  "delete": "Удалить",
+  "@delete": {
+    "description": "Delete button label"
+  },
+  "cancel": "Отмена",
+  "@cancel": {
+    "description": "Cancel button label"
+  },
+  "deleteMedicationTitle": "Удалить лекарство?",
+  "@deleteMedicationTitle": {
+    "description": "Delete confirmation dialog title"
+  },
+  "deleteMedicationMessage": "Расписание и история приёмов «{name}» тоже будут удалены.",
+  "@deleteMedicationMessage": {
+    "description": "Delete confirmation dialog message",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "saveFailed": "Не удалось сохранить. Попробуйте ещё раз",
+  "@saveFailed": {
+    "description": "Snackbar shown when saving fails"
+  },
+  "medicationNotFound": "Лекарство не найдено",
+  "@medicationNotFound": {
+    "description": "Shown when the medication to edit does not exist"
+  },
+  "errorRequired": "Обязательное поле",
+  "@errorRequired": {
+    "description": "Validation error: field is required"
+  },
+  "errorTooLong": "Не длиннее {max} символов",
+  "@errorTooLong": {
+    "description": "Validation error: text is too long",
+    "placeholders": {
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "errorInvalidNumber": "Введите число больше нуля",
+  "@errorInvalidNumber": {
+    "description": "Validation error: invalid positive number"
+  },
+  "errorNoTimes": "Добавьте хотя бы одно время приёма",
+  "@errorNoTimes": {
+    "description": "Validation error: no intake times"
+  },
+  "errorNoWeekdays": "Выберите хотя бы один день",
+  "@errorNoWeekdays": {
+    "description": "Validation error: no weekdays selected"
+  },
+  "errorEndBeforeStart": "Окончание не может быть раньше начала",
+  "@errorEndBeforeStart": {
+    "description": "Validation error: end date before start date"
   }
 }

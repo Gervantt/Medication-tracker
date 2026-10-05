@@ -41,7 +41,9 @@ class MedicationFormCubit extends Cubit<MedicationFormState> {
 
   /// Fills the form with an existing medication for editing.
   Future<void> load(int id) async {
-    emit(state.copyWith(status: MedicationFormStatus.loading));
+    emit(
+      state.copyWith(status: MedicationFormStatus.loading, medicationId: id),
+    );
     try {
       final medication = await _getMedication(id);
       emit(

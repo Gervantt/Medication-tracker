@@ -31,6 +31,8 @@ class MedicationFormatter {
     MedicationForm.injection => _l10n.medicationFormInjection,
   };
 
+  String date(DateTime date) => DateFormat.yMMMMd(_locale).format(date);
+
   String time(DoseTime time) =>
       DateFormat.Hm(_locale)
           .format(DateTime(2000, 1, 1, time.hour, time.minute));
