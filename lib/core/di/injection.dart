@@ -17,6 +17,8 @@ import 'package:medtrack/features/medications/domain/usecases/update_medication.
 import 'package:medtrack/features/medications/domain/usecases/watch_medications.dart';
 import 'package:medtrack/features/medications/presentation/cubit/medication_form_cubit.dart';
 import 'package:medtrack/features/medications/presentation/cubit/medications_list_cubit.dart';
+import 'package:medtrack/features/today/domain/usecases/watch_day_intakes.dart';
+import 'package:medtrack/features/today/presentation/cubit/today_cubit.dart';
 
 final GetIt getIt = GetIt.instance;
 
@@ -27,6 +29,7 @@ void configureDependencies() {
   _registerMedications();
   _registerIntakes();
   _registerDiary();
+  _registerToday();
 }
 
 void _registerCore() {
@@ -72,4 +75,16 @@ void _registerDiary() {
   getIt.registerLazySingleton<WellbeingRepository>(
     () => WellbeingRepositoryImpl(getIt<AppDatabase>().wellbeingDao),
   );
+}
+
+void _registerToday() {
+  getIt
+    ..registerLazySingleton(() => WatchDayIntakes(getIt(), getIt()))
+    ..registerFactory(
+      () => TodayCubit(
+        watchDayIntakes: getIt(),
+        markIntake: getIt(),
+        clearIntakeMark: getIt(),
+      ),
+    );
 }

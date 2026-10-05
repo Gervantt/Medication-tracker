@@ -238,5 +238,45 @@
   "errorEndBeforeStart": "Окончание не может быть раньше начала",
   "@errorEndBeforeStart": {
     "description": "Validation error: end date before start date"
+  },
+  "todayEmptyTitle": "На сегодня приёмов нет",
+  "@todayEmptyTitle": {
+    "description": "Empty state title on the Today screen"
+  },
+  "todayEmptyMessage": "Добавьте лекарство с расписанием во вкладке «Лекарства»",
+  "@todayEmptyMessage": {
+    "description": "Empty state message on the Today screen"
+  },
+  "todayProgress": "Принято {taken} из {total}",
+  "@todayProgress": {
+    "description": "Progress of the day: taken intakes out of planned",
+    "placeholders": {
+      "taken": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "markTaken": "Принял",
+  "@markTaken": {
+    "description": "Button that marks an intake as taken"
+  },
+  "markSkipped": "Пропустил",
+  "@markSkipped": {
+    "description": "Button that marks an intake as skipped"
+  },
+  "intakeTaken": "Принято",
+  "@intakeTaken": {
+    "description": "Label of a taken intake"
+  },
+  "intakeSkipped": "Пропущено",
+  "@intakeSkipped": {
+    "description": "Label of a skipped intake"
+  },
+  "undo": "Отменить",
+  "@undo": {
+    "description": "Button that removes an intake mark"
   }
 }
