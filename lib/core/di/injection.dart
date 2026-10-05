@@ -10,6 +10,8 @@ import 'package:medtrack/features/diary/domain/usecases/delete_wellbeing_entry.d
 import 'package:medtrack/features/diary/domain/usecases/get_wellbeing_entry.dart';
 import 'package:medtrack/features/diary/domain/usecases/save_wellbeing_entry.dart';
 import 'package:medtrack/features/diary/domain/usecases/watch_diary_entries.dart';
+import 'package:medtrack/features/diary/presentation/cubit/diary_cubit.dart';
+import 'package:medtrack/features/diary/presentation/cubit/wellbeing_form_cubit.dart';
 import 'package:medtrack/features/intakes/data/repositories/intake_repository_impl.dart';
 import 'package:medtrack/features/intakes/domain/repositories/intake_repository.dart';
 import 'package:medtrack/features/intakes/domain/usecases/clear_intake_mark.dart';
@@ -101,7 +103,17 @@ void _registerDiary() {
     ..registerLazySingleton(() => WatchDiaryEntries(getIt()))
     ..registerLazySingleton(() => GetWellbeingEntry(getIt()))
     ..registerLazySingleton(() => SaveWellbeingEntry(getIt()))
-    ..registerLazySingleton(() => DeleteWellbeingEntry(getIt()));
+    ..registerLazySingleton(() => DeleteWellbeingEntry(getIt()))
+    ..registerFactory(() => DiaryCubit(getIt()))
+    // The edited day is a runtime argument, hence a factory with a param.
+    ..registerFactoryParam<WellbeingFormCubit, DateTime, void>(
+      (date, _) => WellbeingFormCubit(
+        date: date,
+        getEntry: getIt(),
+        saveEntry: getIt(),
+        deleteEntry: getIt(),
+      ),
+    );
 }
 
 void _registerToday() {

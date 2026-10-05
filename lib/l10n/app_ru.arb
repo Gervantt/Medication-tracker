@@ -298,5 +298,45 @@
   "reminderChannelDescription": "Уведомления о времени приёма лекарств",
   "@reminderChannelDescription": {
     "description": "Android notification channel description"
+  },
+  "today": "Сегодня",
+  "@today": {
+    "description": "Relative day name: today"
+  },
+  "yesterday": "Вчера",
+  "@yesterday": {
+    "description": "Relative day name: yesterday"
+  },
+  "moodVeryBad": "Очень плохо",
+  "@moodVeryBad": {
+    "description": "Mood 1 of 5"
+  },
+  "moodBad": "Плохо",
+  "@moodBad": {
+    "description": "Mood 2 of 5"
+  },
+  "moodOkay": "Нормально",
+  "@moodOkay": {
+    "description": "Mood 3 of 5"
+  },
+  "moodGood": "Хорошо",
+  "@moodGood": {
+    "description": "Mood 4 of 5"
+  },
+  "moodGreat": "Отлично",
+  "@moodGreat": {
+    "description": "Mood 5 of 5"
+  },
+  "symptomHeadache": "Головная боль",
+  "@symptomHeadache": {
+    "description": "Predefined symptom: headache"
+  },
+  "symptomNausea": "Тошнота",
+  "@symptomNausea": {
+    "description": "Predefined symptom: nausea"
+  },
+  "symptomWeakness": "Слабость",
+  "@symptomWeakness": {
+    "description": "Predefined symptom: weakness"
   }
 }
