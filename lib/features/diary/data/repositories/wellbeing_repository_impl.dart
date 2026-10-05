@@ -1,3 +1,4 @@
+import 'package:medtrack/core/database/app_database.dart';
 import 'package:medtrack/core/database/daos/wellbeing_dao.dart';
 import 'package:medtrack/features/diary/data/mappers/wellbeing_entry_mapper.dart';
 import 'package:medtrack/features/diary/domain/entities/wellbeing_entry.dart';
@@ -12,9 +13,11 @@ class WellbeingRepositoryImpl implements WellbeingRepository {
   Stream<List<WellbeingEntry>> watchEntries({
     required DateTime from,
     required DateTime to,
-  }) => _dao
-      .watchInRange(from, to)
-      .map((rows) => [for (final row in rows) row.toEntity()]);
+  }) => _dao.watchInRange(from, to).map(_toEntities);
+
+  @override
+  Stream<List<WellbeingEntry>> watchAllEntries() =>
+      _dao.watchAll().map(_toEntities);
 
   @override
   Future<WellbeingEntry?> getEntry(DateTime date) async =>
@@ -26,4 +29,8 @@ class WellbeingRepositoryImpl implements WellbeingRepository {
 
   @override
   Future<void> deleteEntry(DateTime date) => _dao.deleteByDate(date);
+
+  List<WellbeingEntry> _toEntities(List<WellbeingEntryRow> rows) => [
+    for (final row in rows) row.toEntity(),
+  ];
 }

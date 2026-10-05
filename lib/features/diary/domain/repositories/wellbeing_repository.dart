@@ -7,6 +7,9 @@ abstract interface class WellbeingRepository {
     required DateTime to,
   });
 
+  /// All entries, newest first.
+  Stream<List<WellbeingEntry>> watchAllEntries();
+
   Future<WellbeingEntry?> getEntry(DateTime date);
 
   /// Creates the entry or replaces the existing one for the same day.

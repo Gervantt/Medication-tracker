@@ -45,5 +45,15 @@ void main() {
 
       expect(entries.map((e) => e.date), [yesterday, day]);
     });
+
+    test('watchAllEntries returns entries newest first', () async {
+      final yesterday = DateTime(2026, 10, 4);
+      await repository.saveEntry(WellbeingEntry(date: yesterday, mood: 5));
+      await repository.saveEntry(WellbeingEntry(date: day, mood: 3));
+
+      final entries = await repository.watchAllEntries().first;
+
+      expect(entries.map((e) => e.date), [day, yesterday]);
+    });
   });
 }

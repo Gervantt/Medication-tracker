@@ -21,6 +21,13 @@ class WellbeingDao extends DatabaseAccessor<AppDatabase>
         .watch();
   }
 
+  /// All entries, newest first.
+  Stream<List<WellbeingEntryRow>> watchAll() {
+    return (select(
+      wellbeingEntries,
+    )..orderBy([(e) => OrderingTerm.desc(e.date)])).watch();
+  }
+
   Future<WellbeingEntryRow?> getByDate(DateTime date) {
     return (select(
       wellbeingEntries,
