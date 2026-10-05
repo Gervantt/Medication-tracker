@@ -173,5 +173,62 @@ void main() {
         expect(cubit.state.status, MedicationFormStatus.deleted);
       },
     );
+
+    blocTest<MedicationFormCubit, MedicationFormState>(
+      'saves specific weekdays, end date and label color',
+      setUp: () => when(() => addMedication(any())).thenAnswer((_) async => 1),
+      build: buildCubit,
+      act: (cubit) async {
+        cubit
+          ..nameChanged('Ibuprofen')
+          ..dosageAmountChanged('2,5')
+          ..everyDayChanged(everyDay: false)
+          ..weekdayToggled(DateTime.monday)
+          ..weekdayToggled(DateTime.friday)
+          ..weekdayToggled(DateTime.monday)
+          ..timeRemoved(const DoseTime(hour: 9, minute: 0))
+          ..timeAdded(const DoseTime(hour: 21, minute: 0))
+          ..endDateChanged(DateTime(2026, 10, 20, 18))
+          ..colorChanged(0xFF1E88E5)
+          ..noteChanged('   ');
+        await cubit.submit();
+      },
+      verify: (_) {
+        final saved =
+            verify(() => addMedication(captureAny())).captured.single
+                as Medication;
+        expect(saved.dosage.amount, 2.5);
+        expect(saved.schedule.weekdays, {DateTime.friday});
+        expect(saved.schedule.times, const [DoseTime(hour: 21, minute: 0)]);
+        expect(saved.endDate, DateTime(2026, 10, 20));
+        expect(saved.colorValue, 0xFF1E88E5);
+        expect(saved.note, isNull);
+      },
+    );
+
+    blocTest<MedicationFormCubit, MedicationFormState>(
+      'clears the end date',
+      build: buildCubit,
+      act: (cubit) => cubit
+        ..endDateChanged(DateTime(2026, 10, 20))
+        ..endDateChanged(null),
+      verify: (cubit) => expect(cubit.state.endDate, isNull),
+    );
+
+    blocTest<MedicationFormCubit, MedicationFormState>(
+      'reports a failed delete',
+      setUp: () {
+        when(() => getMedication(1)).thenAnswer((_) async => buildMedication());
+        when(() => deleteMedication(1)).thenThrow(Exception('db'));
+      },
+      build: buildCubit,
+      act: (cubit) async {
+        await cubit.load(1);
+        await cubit.delete();
+      },
+      verify: (cubit) =>
+          expect(cubit.state.status, MedicationFormStatus.saveFailure),
+      errors: () => [isA<Exception>()],
+    );
   });
 }
