@@ -6,6 +6,8 @@ import 'package:medtrack/features/diary/data/repositories/wellbeing_repository_i
 import 'package:medtrack/features/diary/domain/repositories/wellbeing_repository.dart';
 import 'package:medtrack/features/intakes/data/repositories/intake_repository_impl.dart';
 import 'package:medtrack/features/intakes/domain/repositories/intake_repository.dart';
+import 'package:medtrack/features/intakes/domain/usecases/clear_intake_mark.dart';
+import 'package:medtrack/features/intakes/domain/usecases/mark_intake.dart';
 import 'package:medtrack/features/medications/data/repositories/medication_repository_impl.dart';
 import 'package:medtrack/features/medications/domain/repositories/medication_repository.dart';
 import 'package:medtrack/features/medications/domain/usecases/add_medication.dart';
@@ -58,9 +60,12 @@ void _registerMedications() {
 }
 
 void _registerIntakes() {
-  getIt.registerLazySingleton<IntakeRepository>(
-    () => IntakeRepositoryImpl(getIt<AppDatabase>().intakesDao),
-  );
+  getIt
+    ..registerLazySingleton<IntakeRepository>(
+      () => IntakeRepositoryImpl(getIt<AppDatabase>().intakesDao),
+    )
+    ..registerLazySingleton(() => MarkIntake(getIt()))
+    ..registerLazySingleton(() => ClearIntakeMark(getIt()));
 }
 
 void _registerDiary() {
