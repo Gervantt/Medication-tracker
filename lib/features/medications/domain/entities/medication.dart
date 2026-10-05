@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:medtrack/core/extensions/date_time_extensions.dart';
 import 'package:medtrack/features/medications/domain/entities/dosage.dart';
 import 'package:medtrack/features/medications/domain/entities/medication_form.dart';
 import 'package:medtrack/features/medications/domain/entities/medication_schedule.dart';
@@ -32,6 +33,24 @@ class Medication extends Equatable {
 
   /// ARGB label color; kept as `int` so the domain does not depend on Flutter.
   final int colorValue;
+
+  /// Whether the course runs on [date] and its weekday is scheduled.
+  bool isActiveOn(DateTime date) {
+    final day = date.dateOnly;
+    final end = endDate;
+    return !day.isBefore(startDate) &&
+        (end == null || !day.isAfter(end)) &&
+        schedule.weekdays.contains(day.weekday);
+  }
+
+  /// Local date-times of all planned intakes on [date], earliest first.
+  List<DateTime> scheduledTimesOn(DateTime date) {
+    if (!isActiveOn(date)) return const [];
+    return [
+      for (final time in schedule.times)
+        DateTime(date.year, date.month, date.day, time.hour, time.minute),
+    ];
+  }
 
   @override
   List<Object?> get props => [
