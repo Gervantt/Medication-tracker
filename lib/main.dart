@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:medtrack/app/app.dart';
 import 'package:medtrack/core/bloc/app_bloc_observer.dart';
 import 'package:medtrack/core/di/injection.dart';
@@ -13,6 +14,8 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = const AppBlocObserver();
   await configureLocalTimeZone();
+  // Reminder texts are formatted before MaterialApp loads its localizations.
+  await initializeDateFormatting();
   await configureDependencies();
   await _startReminders();
   runApp(MedTrackApp(router: getIt<GoRouter>()));
