@@ -69,6 +69,8 @@ class DiaryView extends StatelessWidget {
         },
       ),
       floatingActionButton: FloatingActionButton.extended(
+        // Tabs stay alive in the shell, so every FAB needs its own tag.
+        heroTag: AppRoutes.diary,
         onPressed: () => context.push(AppRoutes.diaryEntry(clock.now())),
         icon: const Icon(Icons.edit_outlined),
         label: Text(l10n.diaryTodayEntry),

@@ -79,6 +79,8 @@ class MedicationsView extends StatelessWidget {
       ),
       floatingActionButton: showFab
           ? FloatingActionButton.extended(
+              // Tabs stay alive in the shell, so every FAB needs its own tag.
+              heroTag: AppRoutes.medications,
               onPressed: () => context.push(AppRoutes.medicationNew),
               icon: const Icon(Icons.add),
               label: Text(l10n.addMedication),
