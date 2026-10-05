@@ -338,5 +338,49 @@
   "symptomWeakness": "Слабость",
   "@symptomWeakness": {
     "description": "Predefined symptom: weakness"
+  },
+  "diaryEmptyTitle": "Записей пока нет",
+  "@diaryEmptyTitle": {
+    "description": "Empty state title of the diary"
+  },
+  "diaryEmptyMessage": "Отмечайте самочувствие каждый день, чтобы видеть динамику в статистике",
+  "@diaryEmptyMessage": {
+    "description": "Empty state message of the diary"
+  },
+  "diaryTodayEntry": "Запись за сегодня",
+  "@diaryTodayEntry": {
+    "description": "Button that opens today's diary entry"
+  },
+  "diaryPickDay": "Запись за другой день",
+  "@diaryPickDay": {
+    "description": "Tooltip of the button that picks a day for a diary entry"
+  },
+  "moodQuestion": "Как вы себя чувствуете?",
+  "@moodQuestion": {
+    "description": "Mood section title"
+  },
+  "errorMoodRequired": "Выберите самочувствие",
+  "@errorMoodRequired": {
+    "description": "Validation error: mood is not selected"
+  },
+  "sectionSymptoms": "Симптомы",
+  "@sectionSymptoms": {
+    "description": "Symptoms section title"
+  },
+  "customSymptom": "Свой вариант",
+  "@customSymptom": {
+    "description": "Custom symptom field label"
+  },
+  "addSymptom": "Добавить симптом",
+  "@addSymptom": {
+    "description": "Tooltip of the button that adds a custom symptom"
+  },
+  "deleteEntryTitle": "Удалить запись?",
+  "@deleteEntryTitle": {
+    "description": "Delete diary entry dialog title"
+  },
+  "deleteEntryMessage": "Запись о самочувствии за этот день будет удалена.",
+  "@deleteEntryMessage": {
+    "description": "Delete diary entry dialog message"
   }
 }
