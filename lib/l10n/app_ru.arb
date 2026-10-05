@@ -278,5 +278,25 @@
   "undo": "Отменить",
   "@undo": {
     "description": "Button that removes an intake mark"
+  },
+  "reminderBody": "Пора принять {dosage} · {time}",
+  "@reminderBody": {
+    "description": "Body of an intake reminder notification",
+    "placeholders": {
+      "dosage": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "reminderChannelName": "Напоминания о приёме",
+  "@reminderChannelName": {
+    "description": "Android notification channel name"
+  },
+  "reminderChannelDescription": "Уведомления о времени приёма лекарств",
+  "@reminderChannelDescription": {
+    "description": "Android notification channel description"
   }
 }
