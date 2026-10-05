@@ -1,0 +1,25 @@
+{
+  "meta": {"results": {"skip": 0, "limit": 10, "total": 2}},
+  "results": [
+    {
+      "id": "rx-label-1",
+      "openfda": {
+        "brand_name": ["Lipitor"],
+        "generic_name": ["ATORVASTATIN CALCIUM"],
+        "manufacturer_name": ["Viatris Specialty LLC"]
+      },
+      "indications_and_usage": ["1 INDICATIONS AND USAGE   LIPITOR is indicated\n to reduce the risk of MI."],
+      "dosage_and_administration": ["2 DOSAGE AND ADMINISTRATION 10 mg to 80 mg once daily."],
+      "boxed_warning": ["Boxed warning text."],
+      "warnings_and_cautions": ["5 WARNINGS AND PRECAUTIONS Myopathy."],
+      "adverse_reactions": ["6 ADVERSE REACTIONS Nasopharyngitis, arthralgia."],
+      "unknown_field": ["ignored"]
+    },
+    {
+      "id": "otc-label-2",
+      "openfda": {"generic_name": ["IBUPROFEN"]},
+      "purpose": ["Pain reliever/fever reducer"],
+      "warnings": ["Allergy alert: ibuprofen may cause a severe allergic reaction."]
+    }
+  ]
+}

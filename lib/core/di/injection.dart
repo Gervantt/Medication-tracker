@@ -3,6 +3,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:medtrack/core/database/app_database.dart';
+import 'package:medtrack/core/network/dio_factory.dart';
 import 'package:medtrack/core/router/app_router.dart';
 import 'package:medtrack/features/diary/data/repositories/wellbeing_repository_impl.dart';
 import 'package:medtrack/features/diary/domain/repositories/wellbeing_repository.dart';
@@ -12,6 +13,11 @@ import 'package:medtrack/features/diary/domain/usecases/save_wellbeing_entry.dar
 import 'package:medtrack/features/diary/domain/usecases/watch_diary_entries.dart';
 import 'package:medtrack/features/diary/presentation/cubit/diary_cubit.dart';
 import 'package:medtrack/features/diary/presentation/cubit/wellbeing_form_cubit.dart';
+import 'package:medtrack/features/drug_search/data/datasources/open_fda_remote_data_source.dart';
+import 'package:medtrack/features/drug_search/data/repositories/drug_repository_impl.dart';
+import 'package:medtrack/features/drug_search/domain/repositories/drug_repository.dart';
+import 'package:medtrack/features/drug_search/domain/usecases/get_drug_label.dart';
+import 'package:medtrack/features/drug_search/domain/usecases/search_drugs.dart';
 import 'package:medtrack/features/intakes/data/repositories/intake_repository_impl.dart';
 import 'package:medtrack/features/intakes/domain/repositories/intake_repository.dart';
 import 'package:medtrack/features/intakes/domain/usecases/clear_intake_mark.dart';
@@ -48,6 +54,7 @@ void configureDependencies() {
   _registerToday();
   _registerReminders();
   _registerStatistics();
+  _registerDrugSearch();
 }
 
 void _registerCore() {
@@ -152,4 +159,16 @@ void _registerStatistics() {
   getIt
     ..registerLazySingleton(() => WatchStatistics(getIt(), getIt(), getIt()))
     ..registerFactory(() => StatisticsCubit(getIt()));
+}
+
+void _registerDrugSearch() {
+  getIt
+    ..registerLazySingleton(
+      () => OpenFdaRemoteDataSource(
+        DioFactory.create(baseUrl: OpenFdaRemoteDataSource.baseUrl),
+      ),
+    )
+    ..registerLazySingleton<DrugRepository>(() => DrugRepositoryImpl(getIt()))
+    ..registerLazySingleton(() => SearchDrugs(getIt()))
+    ..registerLazySingleton(() => GetDrugLabel(getIt()));
 }
