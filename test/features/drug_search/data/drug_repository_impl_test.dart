@@ -81,7 +81,8 @@ void main() {
       final otc = labels.last;
       expect(otc.brandName, isNull);
       expect(otc.name, 'IBUPROFEN');
-      expect(otc.purpose, 'Pain reliever/fever reducer');
+      // The duplicated heading of the OTC section is removed.
+      expect(otc.purpose, 'Purpose Pain reliever/fever reducer');
       expect(otc.sideEffects, isNull);
     });
 

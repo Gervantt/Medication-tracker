@@ -37,10 +37,15 @@ class _ExpandableTextSectionState extends State<ExpandableTextSection> {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SelectableText(
-                  widget.text,
-                  style: style,
-                  maxLines: _expanded ? null : _collapsedLines,
+                // SelectableText with maxLines always reserves the height of
+                // all lines, so selection comes from SelectionArea instead.
+                SelectionArea(
+                  child: Text(
+                    widget.text,
+                    style: style,
+                    maxLines: _expanded ? null : _collapsedLines,
+                    overflow: _expanded ? null : TextOverflow.ellipsis,
+                  ),
                 ),
                 if (overflows || _expanded)
                   TextButton(

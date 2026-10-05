@@ -20,12 +20,18 @@ String? _first(List<String>? values) {
   return value == null || value.isEmpty ? null : value;
 }
 
+/// OTC labels often repeat the section heading: "Uses Uses temporarily…".
+final _repeatedFirstWord = RegExp(r'^(\w+) \1\b');
+
 /// Joins label paragraphs, collapsing the irregular whitespace of the
 /// source documents. Returns `null` when there is no text.
 String? _join(List<String>? paragraphs) {
   final text = [
     for (final paragraph in paragraphs ?? const <String>[])
-      paragraph.replaceAll(RegExp(r'\s+'), ' ').trim(),
+      paragraph
+          .replaceAll(RegExp(r'\s+'), ' ')
+          .trim()
+          .replaceFirstMapped(_repeatedFirstWord, (match) => match[1]!),
   ].where((p) => p.isNotEmpty).join('\n\n');
   return text.isEmpty ? null : text;
 }

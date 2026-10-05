@@ -18,7 +18,7 @@
     {
       "id": "otc-label-2",
       "openfda": {"generic_name": ["IBUPROFEN"]},
-      "purpose": ["Pain reliever/fever reducer"],
+      "purpose": ["Purpose Purpose Pain reliever/fever reducer"],
       "warnings": ["Allergy alert: ibuprofen may cause a severe allergic reaction."]
     }
   ]
