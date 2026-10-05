@@ -30,6 +30,8 @@ import 'package:medtrack/features/reminders/data/notification_response_handler.d
 import 'package:medtrack/features/reminders/domain/repositories/reminder_scheduler.dart';
 import 'package:medtrack/features/reminders/domain/usecases/reminder_sync_trigger.dart';
 import 'package:medtrack/features/reminders/domain/usecases/sync_reminders.dart';
+import 'package:medtrack/features/statistics/domain/usecases/watch_statistics.dart';
+import 'package:medtrack/features/statistics/presentation/cubit/statistics_cubit.dart';
 import 'package:medtrack/features/today/domain/usecases/watch_day_intakes.dart';
 import 'package:medtrack/features/today/presentation/cubit/today_cubit.dart';
 import 'package:medtrack/l10n/gen/app_localizations.dart';
@@ -45,6 +47,7 @@ void configureDependencies() {
   _registerDiary();
   _registerToday();
   _registerReminders();
+  _registerStatistics();
 }
 
 void _registerCore() {
@@ -143,4 +146,10 @@ void _registerReminders() {
     ..registerLazySingleton(
       () => NotificationResponseHandler(getIt(), getIt()),
     );
+}
+
+void _registerStatistics() {
+  getIt
+    ..registerLazySingleton(() => WatchStatistics(getIt(), getIt(), getIt()))
+    ..registerFactory(() => StatisticsCubit(getIt()));
 }

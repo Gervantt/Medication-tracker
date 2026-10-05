@@ -20,10 +20,6 @@
   "@navStatistics": {
     "description": "Bottom navigation label for the Statistics tab"
   },
-  "comingSoon": "Скоро здесь появится контент",
-  "@comingSoon": {
-    "description": "Placeholder text for screens that are not implemented yet"
-  },
   "errorTitle": "Что-то пошло не так",
   "@errorTitle": {
     "description": "Title of a generic error state"
@@ -382,5 +378,86 @@
   "deleteEntryMessage": "Запись о самочувствии за этот день будет удалена.",
   "@deleteEntryMessage": {
     "description": "Delete diary entry dialog message"
+  },
+  "statsEmptyTitle": "Пока нет данных",
+  "@statsEmptyTitle": {
+    "description": "Empty state title of the statistics screen"
+  },
+  "statsEmptyMessage": "Добавьте лекарства, отмечайте приёмы и ведите дневник — здесь появится статистика",
+  "@statsEmptyMessage": {
+    "description": "Empty state message of the statistics screen"
+  },
+  "statsWeek": "7 дней",
+  "@statsWeek": {
+    "description": "Adherence period: last 7 days"
+  },
+  "statsMonth": "30 дней",
+  "@statsMonth": {
+    "description": "Adherence period: last 30 days"
+  },
+  "statsAdherence": "Соблюдение · {period}",
+  "@statsAdherence": {
+    "description": "Adherence card title",
+    "placeholders": {
+      "period": {
+        "type": "String"
+      }
+    }
+  },
+  "statsTakenOf": "Принято {taken} из {counted}",
+  "@statsTakenOf": {
+    "description": "Taken intakes out of counted ones",
+    "placeholders": {
+      "taken": {
+        "type": "int"
+      },
+      "counted": {
+        "type": "int"
+      }
+    }
+  },
+  "statsNoData": "Нет данных",
+  "@statsNoData": {
+    "description": "Shown instead of a percentage when nothing can be measured yet"
+  },
+  "statsMoodTitle": "Самочувствие за 30 дней",
+  "@statsMoodTitle": {
+    "description": "Mood chart title"
+  },
+  "statsMoodEmpty": "За последние 30 дней нет записей в дневнике",
+  "@statsMoodEmpty": {
+    "description": "Mood chart empty state"
+  },
+  "previousMonth": "Предыдущий месяц",
+  "@previousMonth": {
+    "description": "Tooltip: previous calendar month"
+  },
+  "nextMonth": "Следующий месяц",
+  "@nextMonth": {
+    "description": "Tooltip: next calendar month"
+  },
+  "dayStatusAllTaken": "Всё принято",
+  "@dayStatusAllTaken": {
+    "description": "Calendar day status: all intakes taken"
+  },
+  "dayStatusPartial": "Частично",
+  "@dayStatusPartial": {
+    "description": "Calendar day status: some intakes taken"
+  },
+  "dayStatusMissed": "Пропуски",
+  "@dayStatusMissed": {
+    "description": "Calendar day status: no intakes taken"
+  },
+  "dayStatusInProgress": "В процессе",
+  "@dayStatusInProgress": {
+    "description": "Calendar day status: today, not all intakes marked yet"
+  },
+  "dayStatusUpcoming": "Запланировано",
+  "@dayStatusUpcoming": {
+    "description": "Calendar day status: future day with intakes"
+  },
+  "dayStatusNoIntakes": "Нет приёмов",
+  "@dayStatusNoIntakes": {
+    "description": "Calendar day status: nothing planned"
   }
 }
