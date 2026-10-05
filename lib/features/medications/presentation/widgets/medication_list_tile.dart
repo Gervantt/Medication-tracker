@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:medtrack/core/extensions/context_extensions.dart';
+import 'package:medtrack/core/widgets/color_dot.dart';
 import 'package:medtrack/features/medications/domain/entities/medication.dart';
 import 'package:medtrack/features/medications/presentation/formatters/medication_formatter.dart';
-import 'package:medtrack/features/medications/presentation/widgets/color_dot.dart';
 
 class MedicationListTile extends StatelessWidget {
   const MedicationListTile({required this.medication, this.onTap, super.key});
