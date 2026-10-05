@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:medtrack/core/di/injection.dart';
 import 'package:medtrack/core/extensions/context_extensions.dart';
+import 'package:medtrack/core/router/app_routes.dart';
 import 'package:medtrack/core/widgets/empty_view.dart';
 import 'package:medtrack/core/widgets/error_view.dart';
 import 'package:medtrack/core/widgets/loading_view.dart';
@@ -46,6 +48,11 @@ class MedicationsView extends StatelessWidget {
           ),
         },
       ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () => context.push(AppRoutes.medicationNew),
+        icon: const Icon(Icons.add),
+        label: Text(l10n.addMedication),
+      ),
     );
   }
 }
@@ -60,8 +67,15 @@ class _MedicationsList extends StatelessWidget {
     return ListView.separated(
       itemCount: medications.length,
       separatorBuilder: (_, _) => const Divider(height: 1),
-      itemBuilder: (context, index) =>
-          MedicationListTile(medication: medications[index]),
+      // Bottom padding keeps the last item clear of the FAB.
+      padding: const EdgeInsets.only(bottom: 88),
+      itemBuilder: (context, index) {
+        final medication = medications[index];
+        return MedicationListTile(
+          medication: medication,
+          onTap: () => context.push(AppRoutes.medicationEdit(medication.id!)),
+        );
+      },
     );
   }
 }
