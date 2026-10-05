@@ -1,3 +1,5 @@
+import 'package:flutter/widgets.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:medtrack/core/database/app_database.dart';
@@ -17,8 +19,14 @@ import 'package:medtrack/features/medications/domain/usecases/update_medication.
 import 'package:medtrack/features/medications/domain/usecases/watch_medications.dart';
 import 'package:medtrack/features/medications/presentation/cubit/medication_form_cubit.dart';
 import 'package:medtrack/features/medications/presentation/cubit/medications_list_cubit.dart';
+import 'package:medtrack/features/reminders/data/local_notification_scheduler.dart';
+import 'package:medtrack/features/reminders/data/notification_response_handler.dart';
+import 'package:medtrack/features/reminders/domain/repositories/reminder_scheduler.dart';
+import 'package:medtrack/features/reminders/domain/usecases/reminder_sync_trigger.dart';
+import 'package:medtrack/features/reminders/domain/usecases/sync_reminders.dart';
 import 'package:medtrack/features/today/domain/usecases/watch_day_intakes.dart';
 import 'package:medtrack/features/today/presentation/cubit/today_cubit.dart';
+import 'package:medtrack/l10n/gen/app_localizations.dart';
 
 final GetIt getIt = GetIt.instance;
 
@@ -30,6 +38,7 @@ void configureDependencies() {
   _registerIntakes();
   _registerDiary();
   _registerToday();
+  _registerReminders();
 }
 
 void _registerCore() {
@@ -38,6 +47,15 @@ void _registerCore() {
     ..registerLazySingleton<AppDatabase>(
       AppDatabase.new,
       dispose: (database) => database.close(),
+    )
+    // Localized strings for code outside the widget tree (notifications).
+    ..registerLazySingleton<AppLocalizations>(
+      () => lookupAppLocalizations(
+        basicLocaleListResolution(
+          WidgetsBinding.instance.platformDispatcher.locales,
+          AppLocalizations.supportedLocales,
+        ),
+      ),
     );
 }
 
@@ -86,5 +104,22 @@ void _registerToday() {
         markIntake: getIt(),
         clearIntakeMark: getIt(),
       ),
+    );
+}
+
+void _registerReminders() {
+  getIt
+    ..registerLazySingleton(FlutterLocalNotificationsPlugin.new)
+    ..registerLazySingleton(() => LocalNotificationScheduler(getIt(), getIt()))
+    // Same instance behind the domain interface.
+    ..registerLazySingleton<ReminderScheduler>(
+      getIt.get<LocalNotificationScheduler>,
+    )
+    ..registerLazySingleton(() => SyncReminders(getIt(), getIt(), getIt()))
+    ..registerLazySingleton(
+      () => ReminderSyncTrigger(getIt(), getIt(), getIt()),
+    )
+    ..registerLazySingleton(
+      () => NotificationResponseHandler(getIt(), getIt()),
     );
 }
