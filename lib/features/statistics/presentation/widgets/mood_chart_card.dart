@@ -84,15 +84,20 @@ class MoodChartCard extends StatelessWidget {
         bottomTitles: AxisTitles(
           sideTitles: SideTitles(
             showTitles: true,
-            interval: 7,
+            interval: 1,
             reservedSize: 28,
-            getTitlesWidget: (value, meta) => SideTitleWidget(
-              meta: meta,
-              child: Text(
-                statistics.shortDate(_dayAt(value)),
-                style: Theme.of(context).textTheme.bodySmall,
-              ),
-            ),
+            // One label a week, counted back from today so the last label
+            // is today and labels never collide at the right edge.
+            getTitlesWidget: (value, meta) =>
+                (_days - 1 - value.toInt()) % DateTime.daysPerWeek != 0
+                ? const SizedBox.shrink()
+                : SideTitleWidget(
+                    meta: meta,
+                    child: Text(
+                      statistics.shortDate(_dayAt(value)),
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                  ),
           ),
         ),
       ),
@@ -115,10 +120,6 @@ class MoodChartCard extends StatelessWidget {
           color: colors.primary,
           barWidth: 3,
           isStrokeCapRound: true,
-          belowBarData: BarAreaData(
-            show: true,
-            color: colors.primary.withValues(alpha: 0.12),
-          ),
         ),
       ],
     );

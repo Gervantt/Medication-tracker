@@ -387,22 +387,13 @@
   "@statsEmptyMessage": {
     "description": "Empty state message of the statistics screen"
   },
-  "statsWeek": "7 дней",
+  "statsWeek": "За 7 дней",
   "@statsWeek": {
     "description": "Adherence period: last 7 days"
   },
-  "statsMonth": "30 дней",
+  "statsMonth": "За 30 дней",
   "@statsMonth": {
     "description": "Adherence period: last 30 days"
-  },
-  "statsAdherence": "Соблюдение · {period}",
-  "@statsAdherence": {
-    "description": "Adherence card title",
-    "placeholders": {
-      "period": {
-        "type": "String"
-      }
-    }
   },
   "statsTakenOf": "Принято {taken} из {counted}",
   "@statsTakenOf": {
@@ -587,5 +578,9 @@
   "goToMedications": "Перейти к лекарствам",
   "@goToMedications": {
     "description": "Empty Today screen: open the medications tab"
+  },
+  "statsAdherenceTitle": "Соблюдение графика",
+  "@statsAdherenceTitle": {
+    "description": "Adherence section title on the statistics screen"
   }
 }

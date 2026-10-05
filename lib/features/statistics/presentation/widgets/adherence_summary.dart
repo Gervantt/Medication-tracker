@@ -16,14 +16,26 @@ class AdherenceSummary extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    return Row(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Expanded(
-          child: _RateCard(label: l10n.statsWeek, rate: weekRate),
+        Padding(
+          padding: const EdgeInsets.only(left: 4, bottom: 8),
+          child: Text(
+            l10n.statsAdherenceTitle,
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
         ),
-        const SizedBox(width: 12),
-        Expanded(
-          child: _RateCard(label: l10n.statsMonth, rate: monthRate),
+        Row(
+          children: [
+            Expanded(
+              child: _RateCard(label: l10n.statsWeek, rate: weekRate),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: _RateCard(label: l10n.statsMonth, rate: monthRate),
+            ),
+          ],
         ),
       ],
     );
@@ -47,7 +59,7 @@ class _RateCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(l10n.statsAdherence(label), style: theme.textTheme.labelLarge),
+            Text(label, style: theme.textTheme.labelLarge),
             const SizedBox(height: 8),
             Text(
               StatisticsFormatter(l10n).rate(rate),
