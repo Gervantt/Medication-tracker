@@ -579,5 +579,13 @@
   "onboardingNotNow": "Не сейчас",
   "@onboardingNotNow": {
     "description": "Button that skips notification permission"
+  },
+  "findInFdaDatabase": "Найти в базе FDA",
+  "@findInFdaDatabase": {
+    "description": "Empty medications list: open the drug search"
+  },
+  "goToMedications": "Перейти к лекарствам",
+  "@goToMedications": {
+    "description": "Empty Today screen: open the medications tab"
   }
 }

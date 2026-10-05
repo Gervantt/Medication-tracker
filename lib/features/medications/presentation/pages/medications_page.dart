@@ -29,6 +29,13 @@ class MedicationsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
+    // The empty state has its own buttons, so the FAB would duplicate them.
+    final showFab = context.select<MedicationsListCubit, bool>(
+      (cubit) => switch (cubit.state) {
+        MedicationsListLoaded(:final medications) => medications.isNotEmpty,
+        _ => false,
+      },
+    );
     return Scaffold(
       appBar: AppBar(
         title: Text(l10n.navMedications),
@@ -51,17 +58,32 @@ class MedicationsView extends StatelessWidget {
               icon: Icons.medication_outlined,
               title: l10n.medicationsEmptyTitle,
               message: l10n.medicationsEmptyMessage,
+              action: Column(
+                children: [
+                  FilledButton(
+                    onPressed: () => context.push(AppRoutes.medicationNew),
+                    child: Text(l10n.addMedication),
+                  ),
+                  const SizedBox(height: 8),
+                  TextButton(
+                    onPressed: () => context.push(AppRoutes.drugSearch),
+                    child: Text(l10n.findInFdaDatabase),
+                  ),
+                ],
+              ),
             ),
           MedicationsListLoaded(:final medications) => _MedicationsList(
             medications: medications,
           ),
         },
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => context.push(AppRoutes.medicationNew),
-        icon: const Icon(Icons.add),
-        label: Text(l10n.addMedication),
-      ),
+      floatingActionButton: showFab
+          ? FloatingActionButton.extended(
+              onPressed: () => context.push(AppRoutes.medicationNew),
+              icon: const Icon(Icons.add),
+              label: Text(l10n.addMedication),
+            )
+          : null,
     );
   }
 }

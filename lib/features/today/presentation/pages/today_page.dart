@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:medtrack/core/di/injection.dart';
 import 'package:medtrack/core/extensions/context_extensions.dart';
+import 'package:medtrack/core/router/app_routes.dart';
 import 'package:medtrack/core/widgets/empty_view.dart';
 import 'package:medtrack/core/widgets/error_view.dart';
 import 'package:medtrack/core/widgets/loading_view.dart';
@@ -60,6 +62,10 @@ class _TodayViewState extends State<TodayView> {
             icon: Icons.event_available,
             title: l10n.todayEmptyTitle,
             message: l10n.todayEmptyMessage,
+            action: FilledButton.tonal(
+              onPressed: () => context.go(AppRoutes.medications),
+              child: Text(l10n.goToMedications),
+            ),
           ),
           TodayLoaded() => _TodayList(state: state),
         },
