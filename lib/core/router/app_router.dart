@@ -11,16 +11,30 @@ import 'package:medtrack/features/drug_search/presentation/pages/drug_details_pa
 import 'package:medtrack/features/drug_search/presentation/pages/drug_search_page.dart';
 import 'package:medtrack/features/medications/presentation/pages/medication_form_page.dart';
 import 'package:medtrack/features/medications/presentation/pages/medications_page.dart';
+import 'package:medtrack/features/onboarding/domain/repositories/onboarding_repository.dart';
+import 'package:medtrack/features/onboarding/presentation/pages/onboarding_page.dart';
 import 'package:medtrack/features/statistics/presentation/pages/statistics_page.dart';
 import 'package:medtrack/features/today/presentation/pages/today_page.dart';
 
-GoRouter createAppRouter() {
+GoRouter createAppRouter({required OnboardingRepository onboarding}) {
   // Routes attached to the root navigator are shown above the bottom bar.
   final rootNavigatorKey = GlobalKey<NavigatorState>();
   return GoRouter(
     navigatorKey: rootNavigatorKey,
     initialLocation: AppRoutes.today,
+    // Every navigation passes through onboarding until it is completed.
+    redirect: (context, state) {
+      final isOnOnboarding = state.matchedLocation == AppRoutes.onboarding;
+      if (!onboarding.isCompleted) {
+        return isOnOnboarding ? null : AppRoutes.onboarding;
+      }
+      return isOnOnboarding ? AppRoutes.today : null;
+    },
     routes: [
+      GoRoute(
+        path: AppRoutes.onboarding,
+        builder: (context, state) => const OnboardingPage(),
+      ),
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) =>
             HomeShell(navigationShell: navigationShell),

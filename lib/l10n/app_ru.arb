@@ -543,5 +543,41 @@
   "failureServer": "Сервис FDA временно недоступен. Попробуйте позже",
   "@failureServer": {
     "description": "Server failure message"
+  },
+  "next": "Далее",
+  "@next": {
+    "description": "Button that goes to the next onboarding page"
+  },
+  "onboardingWelcomeTitle": "Добро пожаловать в MedTrack",
+  "@onboardingWelcomeTitle": {
+    "description": "Onboarding page 1 title"
+  },
+  "onboardingWelcomeBody": "Добавляйте лекарства с расписанием, отмечайте приёмы, ведите дневник самочувствия и следите за статистикой.",
+  "@onboardingWelcomeBody": {
+    "description": "Onboarding page 1 text"
+  },
+  "onboardingDisclaimerTitle": "Важно",
+  "@onboardingDisclaimerTitle": {
+    "description": "Onboarding page 2 title"
+  },
+  "onboardingDisclaimerBody": "Приложение помогает не забывать о приёмах, но не ставит диагнозы и не назначает лечение. Не меняйте схему лечения без врача.",
+  "@onboardingDisclaimerBody": {
+    "description": "Onboarding page 2 text"
+  },
+  "onboardingRemindersTitle": "Напоминания",
+  "@onboardingRemindersTitle": {
+    "description": "Onboarding page 3 title"
+  },
+  "onboardingRemindersBody": "MedTrack напомнит о приёме в нужное время, а отметить «Принял» можно прямо из уведомления.",
+  "@onboardingRemindersBody": {
+    "description": "Onboarding page 3 text"
+  },
+  "onboardingEnableReminders": "Включить напоминания",
+  "@onboardingEnableReminders": {
+    "description": "Button that requests notification permission"
+  },
+  "onboardingNotNow": "Не сейчас",
+  "@onboardingNotNow": {
+    "description": "Button that skips notification permission"
   }
 }

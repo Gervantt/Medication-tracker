@@ -1,6 +1,7 @@
 import 'package:medtrack/core/extensions/date_time_extensions.dart';
 
 abstract final class AppRoutes {
+  static const onboarding = '/onboarding';
   static const today = '/today';
   static const medications = '/medications';
   static const medicationNew = '$medications/new';

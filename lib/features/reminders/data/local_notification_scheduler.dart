@@ -5,11 +5,13 @@ import 'package:medtrack/features/medications/domain/entities/dose_time.dart';
 import 'package:medtrack/features/medications/presentation/formatters/medication_formatter.dart';
 import 'package:medtrack/features/reminders/data/reminder_payload.dart';
 import 'package:medtrack/features/reminders/domain/entities/reminder.dart';
+import 'package:medtrack/features/reminders/domain/repositories/notification_permission.dart';
 import 'package:medtrack/features/reminders/domain/repositories/reminder_scheduler.dart';
 import 'package:medtrack/l10n/gen/app_localizations.dart';
 import 'package:timezone/timezone.dart' as tz;
 
-class LocalNotificationScheduler implements ReminderScheduler {
+class LocalNotificationScheduler
+    implements ReminderScheduler, NotificationPermission {
   LocalNotificationScheduler(this._plugin, this._l10n);
 
   static const takenActionId = 'mark_taken';
@@ -59,7 +61,8 @@ class LocalNotificationScheduler implements ReminderScheduler {
   }
 
   /// Android 13+ runtime permission and the iOS authorization prompt.
-  Future<bool> requestPermissions() async {
+  @override
+  Future<bool> requestNotificationPermission() async {
     final granted =
         await _android?.requestNotificationsPermission() ??
         await _ios?.requestPermissions(alert: true, badge: true, sound: true);

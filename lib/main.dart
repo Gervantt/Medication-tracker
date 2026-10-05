@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -15,7 +13,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = const AppBlocObserver();
   await configureLocalTimeZone();
-  configureDependencies();
+  await configureDependencies();
   await _startReminders();
   runApp(MedTrackApp(router: getIt<GoRouter>()));
 }
@@ -29,6 +27,4 @@ Future<void> _startReminders() async {
   final syncTrigger = getIt<ReminderSyncTrigger>()..start();
   // Lives as long as the app; the binding keeps a reference to it.
   AppLifecycleListener(onResume: syncTrigger.start);
-  // Asked on launch until the onboarding screen takes this over.
-  unawaited(scheduler.requestPermissions());
 }

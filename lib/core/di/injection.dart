@@ -33,8 +33,12 @@ import 'package:medtrack/features/medications/domain/usecases/update_medication.
 import 'package:medtrack/features/medications/domain/usecases/watch_medications.dart';
 import 'package:medtrack/features/medications/presentation/cubit/medication_form_cubit.dart';
 import 'package:medtrack/features/medications/presentation/cubit/medications_list_cubit.dart';
+import 'package:medtrack/features/onboarding/data/onboarding_repository_impl.dart';
+import 'package:medtrack/features/onboarding/domain/repositories/onboarding_repository.dart';
+import 'package:medtrack/features/onboarding/presentation/cubit/onboarding_cubit.dart';
 import 'package:medtrack/features/reminders/data/local_notification_scheduler.dart';
 import 'package:medtrack/features/reminders/data/notification_response_handler.dart';
+import 'package:medtrack/features/reminders/domain/repositories/notification_permission.dart';
 import 'package:medtrack/features/reminders/domain/repositories/reminder_scheduler.dart';
 import 'package:medtrack/features/reminders/domain/usecases/reminder_sync_trigger.dart';
 import 'package:medtrack/features/reminders/domain/usecases/sync_reminders.dart';
@@ -43,12 +47,19 @@ import 'package:medtrack/features/statistics/presentation/cubit/statistics_cubit
 import 'package:medtrack/features/today/domain/usecases/watch_day_intakes.dart';
 import 'package:medtrack/features/today/presentation/cubit/today_cubit.dart';
 import 'package:medtrack/l10n/gen/app_localizations.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 final GetIt getIt = GetIt.instance;
 
-/// Registers app-wide dependencies. Each feature adds its own
-/// registrations here as it is implemented.
-void configureDependencies() {
+/// Registers app-wide dependencies. Async because preferences are loaded
+/// from disk once, so the router can read them synchronously later.
+Future<void> configureDependencies() async {
+  final preferences = await SharedPreferencesWithCache.create(
+    cacheOptions: OnboardingRepositoryImpl.cacheOptions,
+  );
+  getIt.registerSingleton<OnboardingRepository>(
+    OnboardingRepositoryImpl(preferences),
+  );
   _registerCore();
   _registerMedications();
   _registerIntakes();
@@ -57,11 +68,14 @@ void configureDependencies() {
   _registerReminders();
   _registerStatistics();
   _registerDrugSearch();
+  _registerOnboarding();
 }
 
 void _registerCore() {
   getIt
-    ..registerLazySingleton<GoRouter>(createAppRouter)
+    ..registerLazySingleton<GoRouter>(
+      () => createAppRouter(onboarding: getIt()),
+    )
     ..registerLazySingleton<AppDatabase>(
       AppDatabase.new,
       dispose: (database) => database.close(),
@@ -144,8 +158,11 @@ void _registerReminders() {
   getIt
     ..registerLazySingleton(FlutterLocalNotificationsPlugin.new)
     ..registerLazySingleton(() => LocalNotificationScheduler(getIt(), getIt()))
-    // Same instance behind the domain interface.
+    // The same instance behind both domain interfaces.
     ..registerLazySingleton<ReminderScheduler>(
+      getIt.get<LocalNotificationScheduler>,
+    )
+    ..registerLazySingleton<NotificationPermission>(
       getIt.get<LocalNotificationScheduler>,
     )
     ..registerLazySingleton(() => SyncReminders(getIt(), getIt(), getIt()))
@@ -175,4 +192,10 @@ void _registerDrugSearch() {
     ..registerLazySingleton(() => GetDrugLabel(getIt()))
     ..registerFactory(() => DrugSearchBloc(getIt()))
     ..registerFactory(() => DrugDetailsCubit(getIt()));
+}
+
+void _registerOnboarding() {
+  getIt.registerFactory(
+    () => OnboardingCubit(repository: getIt(), notificationPermission: getIt()),
+  );
 }
