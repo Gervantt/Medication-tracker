@@ -1,0 +1,27 @@
+{
+  "@@locale": "ru",
+  "appTitle": "MedTrack",
+  "@appTitle": {
+    "description": "Application name"
+  },
+  "navToday": "Сегодня",
+  "@navToday": {
+    "description": "Bottom navigation label for the Today tab"
+  },
+  "navMedications": "Лекарства",
+  "@navMedications": {
+    "description": "Bottom navigation label for the Medications tab"
+  },
+  "navDiary": "Дневник",
+  "@navDiary": {
+    "description": "Bottom navigation label for the Diary tab"
+  },
+  "navStatistics": "Статистика",
+  "@navStatistics": {
+    "description": "Bottom navigation label for the Statistics tab"
+  },
+  "comingSoon": "Скоро здесь появится контент",
+  "@comingSoon": {
+    "description": "Placeholder text for screens that are not implemented yet"
+  }
+}

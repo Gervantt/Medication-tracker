@@ -1,0 +1,18 @@
+include: package:very_good_analysis/analysis_options.yaml
+
+analyzer:
+  exclude:
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"
+    - "lib/l10n/gen/**"
+    - build/**
+    - android/**
+    - ios/**
+
+linter:
+  rules:
+    # This is an application, not a published package.
+    public_member_api_docs: false
+    # Keep the classic `const MyWidget()` constructor syntax that most
+    # Flutter code and reviewers are familiar with.
+    unnecessary_type_name_in_constructor: false
