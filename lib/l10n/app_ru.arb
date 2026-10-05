@@ -23,5 +23,17 @@
   "comingSoon": "Скоро здесь появится контент",
   "@comingSoon": {
     "description": "Placeholder text for screens that are not implemented yet"
+  },
+  "errorTitle": "Что-то пошло не так",
+  "@errorTitle": {
+    "description": "Title of a generic error state"
+  },
+  "errorGenericMessage": "Попробуйте ещё раз чуть позже",
+  "@errorGenericMessage": {
+    "description": "Body of a generic error state"
+  },
+  "retry": "Повторить",
+  "@retry": {
+    "description": "Retry button label"
   }
 }
