@@ -56,3 +56,6 @@ lib/l10n/gen/
 # Generated code (rebuilt by build_runner)
 *.g.dart
 *.freezed.dart
+
+# Test coverage reports
+coverage/
